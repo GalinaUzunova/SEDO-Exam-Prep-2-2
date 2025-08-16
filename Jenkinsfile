@@ -24,7 +24,7 @@ pipeline {
 
         stage('Unit Tests') {
             steps {
-                bat 'dotnet test tests/UnitTests/UnitTests.csproj --configuration Release --no-build'
+                bat 'dotnet test  --configuration Release --no-build'
             }
         }
 
@@ -35,14 +35,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            junit '**/TestResults/*.xml' // Publish test results
-        }
-        failure {
-            mail to: 'team@example.com',
-                 subject: "❌ Build Failed in Jenkins: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "Check Jenkins for details: ${env.BUILD_URL}"
-        }
-    }
+   
 }
