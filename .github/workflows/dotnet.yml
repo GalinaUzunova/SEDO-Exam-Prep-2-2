@@ -1,0 +1,30 @@
+name: Build_test
+
+on:
+  push:
+    branches: [ "main" ]  # Only triggers on direct pushes to main
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: windows
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          6.0.x
+         
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test --configuration Release --no-build --verbosity normal
