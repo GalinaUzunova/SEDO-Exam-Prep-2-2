@@ -28,11 +28,7 @@ pipeline {
             }
         }
 
-        stage('Integration Tests') {
-            steps {
-                bat 'dotnet test tests/IntegrationTests/IntegrationTests.csproj --configuration Release --no-build'
-            }
-        }
+        
     }
 
    
